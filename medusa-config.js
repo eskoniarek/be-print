@@ -27,19 +27,9 @@ const ADMIN_CORS =
 
 // CORS to avoid issues when consuming Medusa from a client
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
-
-const DB_USERNAME = process.env.DB_USERNAME
-const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_HOST = process.env.DB_HOST
-const DB_PORT = process.env.DB_PORT
-const DB_DATABASE = process.env.DB_DATABASE
-
-const DATABASE_URL = 
-  `postgres://${DB_USERNAME}:${DB_PASSWORD}` + 
-  `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
-
-  const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
-
+const DATABASE_URL =
+  process.env.DATABASE_URL || "postgres://localhost/medusa-store";
+const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -67,7 +57,7 @@ const plugins = [
       capture: true,
     },
   },
-  {
+   {
     resolve: `medusa-file-s3`,
     options: {
         s3_url: process.env.S3_URL,
@@ -80,35 +70,22 @@ const plugins = [
           process.env.S3_DOWNLOAD_FILE_DURATION,
     },
   },
-  {
-    resolve: `medusa-plugin-sendgrid`,
-    options: {
-      api_key: process.env.SENDGRID_API_KEY,
-      from: process.env.SENDGRID_FROM,
-      order_placed_template: 
-        process.env.SENDGRID_ORDER_PLACED_ID,
-    },
-  },
 ];
-
 const modules = {
-
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: process.env.REDIS_URL,
-
+      redisUrl: process.env.EVENTS_REDIS_URL,
     }
   },
   cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
-      redisUrl: process.env.REDIS_URL,
-      ttl: 30,
+      redisUrl: process.env.CACHE_REDIS_URL,
+      ttl:30,
     }
   },
 };
-
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
   database_extra: { ssl: { rejectUnauthorized: false } },
