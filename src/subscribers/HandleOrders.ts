@@ -87,7 +87,7 @@ import {
             items: itemDetails,
             total: order.total,
             billing_address: order.billing_address,
-            downloadUrl: urls[0], // If only one URL is expected, use urls[0]
+            downloadUrl: urls, // If only one URL is expected, use urls[0]
           },
         });
       }
