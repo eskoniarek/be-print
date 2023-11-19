@@ -42,15 +42,15 @@ export const POST = async (
   const productMediaService = req.scope.resolve<ProductMediaService>(
     "productMediaService"
   );
-
-  const productMedia = await productMediaService.create(
-    {
-      name,
-      file_key,
-      type,
-    },
-    variant_id
-  );
+  
+  const productMedia = await productMediaService.create({
+    name,
+    file_key,
+    type,
+    variant_id,
+    mime_type,
+  });
+  
 
   res.json({
     product_media: productMedia,

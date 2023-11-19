@@ -121,21 +121,15 @@ class ProductMediaService extends TransactionBaseService {
       }
     );
   }
-
   async create(
-    data: Pick<ProductMedia, "name" | "file_key" | "type">,
-    variantId: string
+    data: Pick<
+      ProductMedia, "name" | "file_key" | "variant_id" | "type" | "mime_type"
+    >
   ): Promise<ProductMedia> {
     return this.atomicPhase_(async (manager) => {
       const productMediaRepo = manager.getRepository(ProductMedia);
-      const productMediaData = {
-        ...data,
-        variant_id: variantId,
-      };
-
-      const productMedia = productMediaRepo.create(productMediaData);
+      const productMedia = productMediaRepo.create(data);
       const result = await productMediaRepo.save(productMedia);
-
       return result;
     });
   }
