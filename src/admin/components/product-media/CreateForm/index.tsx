@@ -1,57 +1,59 @@
-import { useState } from "react"
-import { MediaType } from "../../../../models/product-media"
-import { 
-  useAdminCreateProduct, 
-  useAdminCustomPost, 
+// Inside src/admin/components/product-media/CreateForm/index.tsx
+
+import React, { useState } from "react";
+import { MediaType } from "../../../../models/product-media";
+import {
+  useAdminCreateProduct,
+  useAdminCustomPost,
   useAdminUploadProtectedFile,
-} from "medusa-react"
-import { 
-  CreateProductMediaRequest, 
-  CreateProductMediaResponse, 
-} from "../../../../types/product-media"
-import { 
-  Button, 
-  Container, 
-  Input, 
-  Label, 
-  Select,
-} from "@medusajs/ui"
-import { RouteProps } from "@medusajs/admin-ui"
-import { useNavigate } from "react-router-dom"
+} from "medusa-react";
+import {
+  CreateProductMediaRequest,
+  CreateProductMediaResponse,
+} from "../../../../types/product-media";
+import { Button, Container, Input, Label } from "@medusajs/ui";
+import { RouteProps } from "@medusajs/admin-ui";
+import { useNavigate } from "react-router-dom";
 
-const ProductMediaCreateForm = ({
-  notify,
-}: RouteProps) => {
-  const [productName, setProductName] = useState("")
-  const [
-    productVariantName, 
-    setProductVariantName,
-  ] = useState("")
-  const [name, setName] = useState("")
-  const [type, setType] = useState("main")
-  const [file, setFile] = useState<File>()
+const ProductMediaCreateForm = ({ notify }: RouteProps) => {
+  const [productName, setProductName] = useState("");
+  const [variants] = useState([
+    { name: "A0", type: "main", file: null, prices: [5000, 5000], quantity: 10000 },
+    { name: "A1", type: "main", file: null, prices: [4000, 4000], quantity: 10000 },
+    { name: "A2", type: "main", file: null, prices: [3000, 3000], quantity: 10000 },
+    { name: "A3", type: "main", file: null, prices: [2000, 2000], quantity: 10000 },
+  ]);
 
-  const createProduct = useAdminCreateProduct()
-  const uploadFile = useAdminUploadProtectedFile()
-  const { 
+  const createProduct = useAdminCreateProduct();
+  const uploadFile = useAdminUploadProtectedFile();
+  const {
     mutate: createDigitalProduct,
     status,
-} = useAdminCustomPost<
-  CreateProductMediaRequest,
-  CreateProductMediaResponse
->(
-  "/product-media",
-  ["product-media"]
-)
+  } = useAdminCustomPost<CreateProductMediaRequest, CreateProductMediaResponse>(
+    "/product-media",
+    ["product-media"]
+  );
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault()
-    
-    createProduct.mutate({
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const productVariantsData = variants.map((variant) => ({
+      title: variant.name,
+      options: [
+        {
+          value: variant.name,
+        },
+      ],
+      prices: variant.prices.map((amount, index) => ({
+        currency_code: index === 0 ? "EUR" : "USD",
+        amount: parseFloat(amount.toFixed(2)),
+      })),
+      inventory_quantity: variant.quantity, // Include the quantity property
+    }));
+
+    const { product } = await createProduct.mutateAsync({
       title: productName,
       is_giftcard: false,
       discountable: false,
@@ -60,120 +62,82 @@ const ProductMediaCreateForm = ({
           title: "Digital Product",
         },
       ],
-      variants: [
-        {
-          title: productVariantName,
-          options: [
-            {
-              value: name, // can also be the file name
-            },
-          ],
-          // for simplicity, prices are omitted from form.
-          // Those can be edited from the product's page.
-          prices: [],
-        },
-      ],
-    }, {
-      onSuccess: ({ product }) => {
-        // upload file
-        uploadFile.mutate(file, {
-          onSuccess: ({ uploads }) => {
-            if (!("key" in uploads[0])) {
-              return
-            }
-            // create the digital product
-            createDigitalProduct({
-              variant_id: product.variants[0].id,
-              name,
-              file_key: uploads[0].key as string,
-              type: type as MediaType,
-              mime_type: file.type,
-            }, {
-              onSuccess: () => {
-                notify.success(
-                  "Success", 
-                  "Digital Product Created Successfully"
-                )
-                navigate("/a/product-media")
-              },
-            })
-          },
-        })
-      },
-    })
-  }
+      variants: productVariantsData,
+    });
+
+    for (let index = 0; index < variants.length; index++) {
+      const variant = variants[index];
+
+      if (!variant.file) {
+        // Handle case where file is not selected for a variant
+        continue;
+      }
+
+      const { uploads } = await uploadFile.mutateAsync(variant.file);
+
+      if (!uploads || uploads.length === 0 || !("key" in uploads[0])) {
+        return;
+      }
+
+      await createDigitalProduct({
+        variant_ids: [product.variants[index].id],
+        name: variant.name,
+        file_key: uploads[0].key as string,
+        type: variant.type as MediaType,
+        mime_type: variant.file.type,
+      });
+    }
+
+    notify.success("Success", "Digital Products Created Successfully");
+    navigate("/a/product-media");
+  };
 
   return (
     <Container>
-      <form 
-        onSubmit={handleSubmit} 
-        className="flex flex-col gap-4"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex gap-4 items-center">
           <Label>Product Name</Label>
-          <Input 
-            type="text" 
-            placeholder="Product Name" 
-            value={productName} 
+          <Input
+            type="text"
+            placeholder="Product Name"
+            value={productName}
             onChange={(e) => setProductName(e.target.value)}
           />
         </div>
-        <div className="flex gap-4 items-center">
-          <Label>Product Variant Name</Label>
-          <Input 
-            type="text" 
-            placeholder="Product Variant" 
-            value={productVariantName} 
-            onChange={(e) => 
-              setProductVariantName(e.target.value)
-            }
-          />
-        </div>
-        <div className="flex gap-4 items-center">
-          <Label>Media Name</Label>
-          <Input 
-            type="text" 
-            placeholder="Media Name" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="flex gap-4 items-center">
-          <Label>Type</Label>
-          <Select onValueChange={setType} value={type}>
-            <Select.Trigger>
-              <Select.Value placeholder="Type" />
-            </Select.Trigger>
-            <Select.Content className="z-50">
-              <Select.Item value={"main"}>
-                Main
-              </Select.Item>
-              <Select.Item value={"preview"}>
-                Preview
-              </Select.Item>
-            </Select.Content>
-          </Select>
-        </div>
-        <div className="flex gap-4 items-center">
-          <Label>File</Label>
-          <Input 
-            type="file" 
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </div>
-        <Button 
-  variant="primary" 
-  type="submit" 
-  isLoading={
-    createProduct.status === 'pending' || 
-    uploadFile.status === 'pending' || 
-    status === 'pending'
-  }>
-  Create
-</Button>
+        {variants.map((variant, index) => (
+          <div key={index} className="flex gap-4 items-center">
+            <Label>{`Variant ${index + 1} Name`}</Label>
+            <Input
+              type="text"
+              placeholder={`Variant ${index + 1} Name`}
+              value={variant.name}
+              onChange={(e) => {
+                // You can choose to update the name if needed
+              }}
+            />
+            <Label>{`Variant ${index + 1} File`}</Label>
+            <Input
+              type="file"
+              onChange={(e) => {
+                // You can choose to handle file changes if needed
+              }}
+            />
+          </div>
+        ))}
+        <Button
+          variant="primary"
+          type="submit"
+          isLoading={
+            createProduct.status === "pending" ||
+            uploadFile.status === "pending" ||
+            status === "pending"
+          }
+        >
+          Create
+        </Button>
       </form>
     </Container>
-  )
-}
+  );
+};
 
-export default ProductMediaCreateForm
+export default ProductMediaCreateForm;

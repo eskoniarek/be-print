@@ -1,30 +1,29 @@
-import { RouteConfig } from "@medusajs/admin"
-import { DocumentText } from "@medusajs/icons"
-import { useAdminCustomQuery } from "medusa-react"
-import { 
-  ListProductMediasRequest, 
+// Inside src/admin/routes/product-media/page.tsx
+
+import { RouteConfig } from "@medusajs/admin";
+import { DocumentText } from "@medusajs/icons";
+import { useAdminCustomQuery } from "medusa-react";
+import {
+  ListProductMediasRequest,
   ListProductMediasResponse,
-} from "../../../types/product-media"
-import { 
-  Button, 
-  Container, 
-  Drawer, 
-  Heading, 
+} from "../../../types/product-media";
+import {
+  Button,
+  Container,
+  Drawer,
+  Heading,
   Table,
-} from "@medusajs/ui"
-import { Link } from "react-router-dom"
-import { RouteProps } from "@medusajs/admin-ui"
-import ProductMediaCreateForm 
-  from "../../components/product-media/CreateForm"
+} from "@medusajs/ui";
+import { Link } from "react-router-dom";
+import { RouteProps } from "@medusajs/admin-ui";
+import ProductMediaCreateForm from "../../components/product-media/CreateForm";
+
 
 const ProductMediaListPage = (props: RouteProps) => {
   const { data, isLoading } = useAdminCustomQuery<
-    ListProductMediasRequest, 
+    ListProductMediasRequest,
     ListProductMediasResponse
-  >(
-    "/product-media",
-    ["product-media"]
-  )
+  >("/product-media", ["product-media"]);
 
   return (
     <Container>
@@ -36,9 +35,7 @@ const ProductMediaListPage = (props: RouteProps) => {
           </Drawer.Trigger>
           <Drawer.Content>
             <Drawer.Header>
-              <Drawer.Title>
-                Create Digital Product
-              </Drawer.Title>
+              <Drawer.Title>Create Digital Product</Drawer.Title>
             </Drawer.Header>
             <Drawer.Body>
               <ProductMediaCreateForm {...props} />
@@ -75,9 +72,9 @@ const ProductMediaListPage = (props: RouteProps) => {
                   {product_media.file_key}
                 </Table.Cell>
                 <Table.Cell>
-                  <Link to={`/a/products/${
-                    product_media.variant.product_id
-                  }`}>
+                  <Link
+                    to={`/a/products/${product_media.variant.product_id}`}
+                  >
                     View Product
                   </Link>
                 </Table.Cell>
@@ -87,14 +84,14 @@ const ProductMediaListPage = (props: RouteProps) => {
         </Table>
       )}
     </Container>
-  )
-}
+  );
+};
 
 export const config: RouteConfig = {
   link: {
     label: "Digital Products",
     icon: DocumentText,
   },
-}
+};
 
-export default ProductMediaListPage
+export default ProductMediaListPage;
