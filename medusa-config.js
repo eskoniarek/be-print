@@ -80,6 +80,33 @@ const plugins = [
       process.env.SENDGRID_ORDER_PLACED_ID,
   },
 },
+  {
+    resolve: `medusa-plugin-algolia`,
+    options: {
+      applicationId: process.env.ALGOLIA_APP_ID,
+      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+      settings: {
+      products: {
+          indexSettings: {
+            searchableAttributes: ["title", "description"],
+            attributesToRetrieve: [
+              "title",
+              "description",
+              "handle",
+              "variants",
+              "variant_sku",
+              "options",
+              "collection_title",
+              "collection_handle",
+              "images",
+            ],
+          },
+        },
+
+      },
+    },
+  },
+
 ];
 const modules = {
   eventBus: {
