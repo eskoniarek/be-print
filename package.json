@@ -45,6 +45,7 @@
       "medusa-payment-manual": "^1.0.24",
       "medusa-payment-stripe": "^6.0.5",
       "medusa-plugin-sendgrid": "^1.3.11",
+      "medusa-plugin-algolia": "^0.2.20",
       "medusa-plugin-variant-images": "^1.0.4",
       "medusa-react": "^9.0.9",
       "prism-react-renderer": "^2.0.4",
