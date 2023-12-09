@@ -80,6 +80,13 @@ const plugins = [
       process.env.SENDGRID_ORDER_PLACED_ID,
   },
 },
+   {
+    resolve: `medusa-product-ai-widget`,
+    options: {
+      api_key: process.env.OPENAI_API_KEY,
+      enableUI: true
+    },
+  },
   {
     resolve: `medusa-plugin-algolia`,
     options: {
