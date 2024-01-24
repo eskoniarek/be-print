@@ -31,7 +31,7 @@ import {
       this.fileService_ = fileService
       this.productMediaService_ = productMediaService  // Add this line
       eventBusService.subscribe(
-        "payment.payment_captured", 
+        "order.completed", 
         this.handleOrderPlaced
       )
     }
