@@ -30,6 +30,7 @@ const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL =
   process.env.DATABASE_URL || "postgres://localhost/medusa-store";
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
+
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -72,12 +73,30 @@ const plugins = [
     },
   },
   {
+    resolve: `medusa-plugin-algolia`,
+    options: {
+      applicationId: process.env.ALGOLIA_APP_ID,
+      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+    },
+  },
+
+  {
   resolve: `medusa-plugin-sendgrid`,
   options: {
     api_key: process.env.SENDGRID_API_KEY,
     from: process.env.SENDGRID_FROM,
     order_placed_template: 
       process.env.SENDGRID_ORDER_PLACED_ID,
+      payment_captured_template: 
+      process.env.SENDGRID_PAYMENT_CAPTURED_ID,
+      customer_created_template: 
+      process.env.SENDGRID_CUSTOMER_CONFIRMATION_ID,
+      user_created_template: 
+      process.env.SENDGRID_USER_CONFIRMATION_ID,
+      user_password_reset_template: 
+      process.env.SENDGRID_USER_PASSWORD_RESET_ID,
+      customer_password_reset_template: 
+      process.env.SENDGRID_CUSTOMER_PASSWORD_RESET_ID,
   },
 },
 ];
