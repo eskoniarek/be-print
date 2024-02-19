@@ -77,7 +77,7 @@ import {
   
         // Send an email through SendGrid
         await this.sendGridService_.sendEmail({
-          templateId: "d-8b2d29402c67414fb7293a26f7992c65",
+          templateId: "d-b8923b6993744b789c234188783a1f50",
           from: "support@printinc.shop",
           to: order.customer.email, // Corrected to use customer email
           dynamic_template_data: {
