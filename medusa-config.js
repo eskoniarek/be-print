@@ -130,4 +130,6 @@ module.exports = {
   projectConfig,
   plugins,
   modules,
+  jwtSecret: process.env.JWT_SECRET,
+
 };

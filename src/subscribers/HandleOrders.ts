@@ -39,6 +39,7 @@ import {
     handleOrderPlaced = async (
       data: Record<string, any>
     ) => {
+      console.log(`[HandleOrderPlaced] Start handling order ID: ${data.id}`);
       const order = await this.orderService_.retrieve(data.id, {
         relations: [
           "items", 
@@ -68,7 +69,7 @@ import {
         )
       }
       if (urls.length) {
-        console.log('Digital Products URLs:', urls);
+        console.log(`[HandleOrderPlaced] Sending email with links for order ID: ${data.id}`);
         // Prepare items in the format required by your SendGrid template
         const itemDetails = order.items.map((item) => ({
           quantity: item.quantity,
@@ -90,6 +91,9 @@ import {
             downloadUrl: urls, // If only one URL is expected, use urls[0]
           },
         });
+        console.log(`[HandleOrderPlaced] Email sent for order ID: ${data.id}`);
+      } else {
+        console.log(`[HandleOrderPlaced] No URLs found, not sending email for order ID: ${data.id}`);
       }
     }
   }
