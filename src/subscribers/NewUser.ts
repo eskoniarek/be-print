@@ -10,7 +10,7 @@ import {
      
     sendGridService.sendEmail({  
     templateId: "admin_confirmation",  
-    from: "support@printinc.shop",
+    from: "hello@op-app.co",
     to: data.email,  
     dynamic_template_data: {  
     // any data necessary for your template...  

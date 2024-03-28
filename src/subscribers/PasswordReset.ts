@@ -13,10 +13,10 @@
       console.log(`[HandlePasswordReset] Sending password reset email to: ${email}`);
       await sendGridService.sendEmail({
         templateId: "d-6787aaf90dc043c7975e0335d3096550",
-        from: "support@printinc.shop",
+        from: "hello@op-app.co",
         to: email,
         dynamic_template_data: {
-          reset_link: `https://printinc.shop/account/resetPassword?token=${token}`,
+          reset_link: `https://shop.op-app.co/account/resetPassword?token=${token}`,
           first_name,
           last_name,
         },
