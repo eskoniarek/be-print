@@ -1,23 +1,26 @@
-import axios from 'axios';
-import * as crypto from 'crypto';
+import { TransactionBaseService } from '@medusajs/medusa';
 import { EntityManager } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 import {
+  AbstractPaymentProcessor,
   Cart,
-  Data,
   Payment,
   PaymentSession,
+  Data,
+  PaymentProcessorError,
+  PaymentContext,
+  PaymentSessionResponse,
   PaymentSessionStatus,
-  TransactionBaseService
 } from '@medusajs/medusa';
+import axios from 'axios';
+import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
-interface FourG12hsPaymentPluginOptions {
+export type FourG12hsPaymentPluginOptions = {
   merchantId: string;
-  testMode?: boolean;
-  callbackUrl?: string;
-}
+  callbackUrl: string;
+};
 
-class FourG12hsProviderService extends TransactionBaseService {
+class FourG12hsProviderService extends AbstractPaymentProcessor {
   static identifier = '4g12hs';
   protected manager_: EntityManager;
   protected transactionManager_: EntityManager;
@@ -60,23 +63,15 @@ class FourG12hsProviderService extends TransactionBaseService {
       });
 
       if (response.data.status === 'OK') {
-        const isCartTotalHigh = cart.total > 10000;
-        const idempotencyKey = uuidv4();
-        const currentDate = new Date();
-
-        return {
+        const paymentSession = PaymentSession.build({
           id: response.data.paymentSessionId,
-          status: PaymentSessionStatus.PENDING,
-          data: response.data,
           cart_id: cart.id,
           provider_id: FourG12hsProviderService.identifier,
-          is_selected: isCartTotalHigh,
-          idempotency_key: idempotencyKey,
+          status: PaymentSessionStatus.PENDING,
+          data: response.data as Record<string, unknown>,
           amount: cart.total,
-          payment_authorized_at: null,
-          created_at: currentDate,
-          updated_at: currentDate,
-        } as PaymentSession;
+        });
+        return paymentSession;
       } else {
         throw new Error('Payment creation failed with 4g12hs');
       }
@@ -104,28 +99,53 @@ class FourG12hsProviderService extends TransactionBaseService {
     }
   }
 
-  async updatePayment(paymentSessionData: Data, cart: Cart): Promise<PaymentSession> {
-    const paymentId = paymentSessionData.id as string;
-    const operationType = 'check';
+  async getStatus(payment: Payment): Promise<PaymentSessionStatus> {
+    const paymentId = payment.data.id as string;
     const payload = {
-      opertype: operationType,
+      opertype: 'status',
       transID: paymentId,
-      secret_key_1: process.env.SECRET_KEY_1 || '',
-      secret_key_2: process.env.SECRET_KEY_2 || '',
     };
     const signature = this.generateSignature(payload);
     payload['signature'] = signature;
 
     try {
-      const response = await axios.post('https://fin.4g12hs.com/api/payment/operate', payload, {
+      const response = await axios.post('https://fin.4g12hs.com/api/payment/status', payload, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (response.data.status === 'OK') {
+        return response.data.paymentStatus as PaymentSessionStatus;
+      } else {
+        throw new Error('Failed to check payment status with 4g12hs');
+      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to get payment status with 4g12hs');
+    }
+  }
+
+  async updatePayment(paymentSessionData: PaymentSession, cart: Cart): Promise<PaymentSession> {
+    const transID = paymentSessionData.data.id as string;
+    const payload = {
+      transID: transID,
+      account: this.options_.merchantId,
+      // Include other necessary parameters based on the update requirements
+    };
+
+    const signature = this.generateSignature(payload);
+    payload['signature'] = signature;
+
+    try {
+      const response = await axios.patch(`https://fin.4g12hs.com/api/payment/update`, payload, {
         headers: { 'Content-Type': 'application/json' }
       });
 
       if (response.data.status === 'OK' || response.data.status === 'wait') {
         return {
           ...paymentSessionData,
-          data: response.data,
-        } as PaymentSession;
+          data:          ...paymentSessionData,
+          data: response.data as Record<string, unknown>,
+        };
       } else {
         throw new Error(`Update payment failed with status: ${response.data.status}`);
       }
@@ -136,8 +156,9 @@ class FourG12hsProviderService extends TransactionBaseService {
   }
 
   async authorizePayment(paymentSession: PaymentSession, context: Data): Promise<PaymentSession> {
-    const transID = paymentSession.id;
-    const operationType = 'pay';
+    const transID = paymentSession.data.id as string;
+    const operationType = 'authorize';
+
     const payload = {
       opertype: operationType,
       account: this.options_.merchantId,
@@ -158,12 +179,12 @@ class FourG12hsProviderService extends TransactionBaseService {
         headers: { 'Content-Type': 'application/json' }
       });
 
-        if (response.data.status === 'OK') {
-          return {
-            ...paymentSession,
-            data: response.data,
-          } as PaymentSession;
-        } else {
+      if (response.data.status === 'OK') {
+        return {
+          ...paymentSession,
+          data: response.data as Record<string, unknown>,
+        };
+      } else {
         throw new Error(`Authorization failed with status: ${response.data.status}`);
       }
     } catch (error) {
@@ -173,9 +194,9 @@ class FourG12hsProviderService extends TransactionBaseService {
   }
 
   async capturePayment(payment: Payment): Promise<PaymentSession> {
-    const paymentSessionId = payment.data.id as string;
+    const transactionId = payment.data.id as string;
     const signatureParams = {
-      transID: paymentSessionId,
+      transID: transactionId,
       opertype: 'capture',
       account: this.options_.merchantId,
     };
@@ -190,31 +211,32 @@ class FourG12hsProviderService extends TransactionBaseService {
       });
 
       if (response.data.status === 'OK') {
-        const data = typeof response.data === 'object' ? response.data : {};
-        return {
-          ...payment.data,
-          data: { ...
-            data,
+        return PaymentSession.build({
+          id: payment.id,
+          data: {
+            ...payment.data,
+            ...response.data,
             captured: true,
           },
-        } as PaymentSession;
+        });
       } else {
         throw new Error('Capture failed with 4g12hs');
       }
     } catch (error) {
+      console.error(error);
       throw new Error('Failed to capture payment with 4g12hs');
     }
   }
-  
+
   async refundPayment(payment: Payment, refundAmount: number): Promise<PaymentSession> {
     const transactionId = payment.data.id as string;
     const signatureParams = {
       transID: transactionId,
-      amount: refundAmount.toString(),
       opertype: 'refund',
       account: this.options_.merchantId,
+      amount: refundAmount.toString(),
     };
-  
+
     const signature = this.generateSignature(signatureParams);
     try {
       const response = await axios.post('https://fin.4g12hs.com/api/payment/refund', {
@@ -223,12 +245,15 @@ class FourG12hsProviderService extends TransactionBaseService {
       }, {
         headers: { 'Content-Type': 'application/json' }
       });
-  
+
       if (response.data.status === 'OK') {
-        return {
-          ...payment.data,
-          data: response.data,
-        } as PaymentSession;
+        return PaymentSession.build({
+          id: payment.id,
+          data: {
+            ...payment.data,
+            ...response.data,
+          },
+        });
       } else {
         throw new Error(`Refund failed with status: ${response.data.status}`);
       }
@@ -237,16 +262,15 @@ class FourG12hsProviderService extends TransactionBaseService {
       throw new Error('Failed to process refund with 4g12hs');
     }
   }
-  
+
   async cancelPayment(payment: Payment): Promise<PaymentSession> {
     const transactionId = payment.data.id as string;
-  
     const signatureParams = {
       transID: transactionId,
       opertype: 'cancel',
       account: this.options_.merchantId,
     };
-  
+
     const signature = this.generateSignature(signatureParams);
     try {
       const response = await axios.post('https://fin.4g12hs.com/api/payment/cancel', {
@@ -255,13 +279,15 @@ class FourG12hsProviderService extends TransactionBaseService {
       }, {
         headers: { 'Content-Type': 'application/json' }
       });
-  
+
       if (response.data.status === 'OK') {
-        return {
-          ...payment.data,
-          status: PaymentSessionStatus.CANCELED,
-          data: response.data,
-        } as PaymentSession;
+        return PaymentSession.build({
+          id: payment.id,
+          data: {
+            ...payment.data,
+            ...response.data,
+          },
+        });
       } else {
         throw new Error(`Cancellation failed with status: ${response.data.status}`);
       }
@@ -270,61 +296,6 @@ class FourG12hsProviderService extends TransactionBaseService {
       throw new Error('Failed to cancel payment with 4g12hs');
     }
   }
-  
-  async deletePayment(paymentSession: PaymentSession): Promise<void> {
-    try {
-      const paymentSessionId = paymentSession.id;
-      await axios.delete(`https://fin.4g12hs.com/api/payment/session/${paymentSessionId}`, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to delete payment session with 4g12hs');
-    }
-  }
-  
-  async getStatus(paymentSession: PaymentSession): Promise<PaymentSessionStatus> {
-    const paymentSessionId = paymentSession.id;
-    try {
-      const response = await axios.get(`https://fin.4g12hs.com/api/payment/status/${paymentSessionId}`, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-  
-      if (response.data.status === 'OK') {
-        return response.data.paymentStatus as PaymentSessionStatus;
-      } else {
-        throw new Error('Failed to check payment status with 4g12hs');
-      }
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to get payment status with 4g12hs');
-    }
-  }
-  
-  async updatePaymentData(paymentSession: PaymentSession, updates: Data): Promise<PaymentSession> {
-    const payload = {
-      transID: paymentSession.id,
-      ...updates,
-    };
-  
-    try {
-      const response = await axios.patch(`https://fin.4g12hs.com/api/payment/update`, payload, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-  
-      if (response.data.status === 'OK') {
-        return {
-          ...paymentSession,
-          data: response.data,
-        } as PaymentSession;
-      } else {
-        throw new Error('Failed to update payment data');
-      }
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to update payment data with 4g12hs');
-    }
-  }
-  }
-  
-  export default FourG12hsProviderService;
+}
+
+export default FourG12hsProviderService;
