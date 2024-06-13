@@ -12,7 +12,7 @@ export default class OpenAiService {
     this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    this.model = "gpt-3.5-turbo-0613";
+    this.model = "gpt-3.5-turbo-0125";
     this.encoding = encoding_for_model(this.model);
   }
 

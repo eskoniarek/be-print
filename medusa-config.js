@@ -59,6 +59,12 @@ const plugins = [
       automatic_payment_methods: true,
     },
   },
+  {
+    resolve: `@rsc-labs/medusa-documents`,
+    options: {
+      enableUI: true
+    }
+  },
    {
     resolve: `medusa-file-s3`,
     options: {
