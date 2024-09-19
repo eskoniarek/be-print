@@ -2897,6 +2897,94 @@
   dependencies:
     "@lukeed/csprng" "^1.1.0"
 
+"@medusajs/admin-ui@2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@medusajs/admin-ui/-/admin-ui-2.1.11.tgz#aec27a971dbf41409b68f65cd181d9eb84d9f9a9"
+  integrity sha512-656ThqCNUEvfXupgAhoyUiow9ZOPV7ufIXOeuqq0p+wYJ5CMANesVaXypc/QvdsehNxcgx14Pgvmn/8lbR6L3A==
+  dependencies:
+    "@babel/parser" "7.22.5"
+    "@babel/traverse" "7.22.5"
+    "@hookform/error-message" "^2.0.1"
+    "@hookform/resolvers" "^3.3.1"
+    "@medusajs/icons" "^1.1.0"
+    "@medusajs/ui" "^2.2.4"
+    "@medusajs/ui-preset" "^1.0.2"
+    "@pmmmwh/react-refresh-webpack-plugin" "^0.5.10"
+    "@radix-ui/react-accordion" "^1.0.1"
+    "@radix-ui/react-avatar" "^1.0.1"
+    "@radix-ui/react-collapsible" "^1.0.1"
+    "@radix-ui/react-dialog" "^1.0.4"
+    "@radix-ui/react-dropdown-menu" "^2.0.2"
+    "@radix-ui/react-popover" "^1.0.3"
+    "@radix-ui/react-portal" "^1.0.2"
+    "@radix-ui/react-radio-group" "^1.1.1"
+    "@radix-ui/react-select" "^2.0.0"
+    "@radix-ui/react-switch" "^1.0.1"
+    "@radix-ui/react-tooltip" "^1.0.3"
+    "@segment/analytics-next" "^1.51.1"
+    "@svgr/webpack" "^8.0.1"
+    "@swc/core" "^1.3.61"
+    "@tailwindcss/forms" "^0.5.3"
+    "@tanstack/react-query" "4.22.0"
+    "@tanstack/react-table" "^8.7.9"
+    autoprefixer "^10.4.13"
+    chokidar "^3.5.3"
+    clsx "^1.2.1"
+    copy-to-clipboard "^3.3.1"
+    copy-webpack-plugin "^11.0.0"
+    css-loader "^6.8.1"
+    emoji-picker-react "^4.4.3"
+    framer-motion "^9.1.6"
+    html-webpack-plugin "^5.5.1"
+    i18next "^22.5.0"
+    i18next-browser-languagedetector "^7.0.1"
+    i18next-http-backend "^2.2.1"
+    md5 "^2.3.0"
+    medusa-react "^9.0.13"
+    mini-css-extract-plugin "^2.7.6"
+    moment "^2.29.4"
+    path-browserify "^1.0.1"
+    pluralize "^8.0.0"
+    postcss "^8.4.21"
+    postcss-loader "^7.3.2"
+    postcss-preset-env "^8.4.1"
+    prism-react-renderer "^2.0.4"
+    process "^0.11.10"
+    query-string "^8.1.0"
+    react "^18.2.0"
+    react-collapsible "^2.8.3"
+    react-country-flag "^3.0.2"
+    react-currency-input-field "^3.6.8"
+    react-datepicker "^4.8.0"
+    react-dev-utils "^12.0.1"
+    react-dnd "^16.0.1"
+    react-dnd-html5-backend "^16.0.1"
+    react-dom "^18.2.0"
+    react-helmet-async "^1.3.0"
+    react-highlight-words "^0.18.0"
+    react-hook-form "7.38.0"
+    react-hot-toast "2.4.0"
+    react-hotkeys-hook "^3.4.7"
+    react-i18next "^12.3.1"
+    react-json-tree "^0.17.0"
+    react-jwt "^1.1.4"
+    react-nestable "^2.0.0"
+    react-refresh "^0.14.0"
+    react-router-dom "6.8.0"
+    react-select "^5.5.4"
+    react-table "^7.7.0"
+    style-loader "^3.3.3"
+    swc-loader "^0.2.3"
+    swc-minify-webpack-plugin "^2.1.1"
+    tailwindcss "3.2.2"
+    tailwindcss-radix "^2.7.0"
+    ts-dedent "^2.2.0"
+    type-fest "^3.6.0"
+    webpack "^5.84.1"
+    webpack-dev-server "4.15.0"
+    webpackbar "^5.0.2"
+    zod "^3.22.2"
+
 "@medusajs/admin-ui@^2.1.15":
   version "2.1.15"
   resolved "https://registry.yarnpkg.com/@medusajs/admin-ui/-/admin-ui-2.1.15.tgz#2b8c5efcf8994caa05dc2f782abdd5ecbdd333ff"
@@ -2942,6 +3030,95 @@
     i18next-http-backend "^2.2.1"
     md5 "^2.3.0"
     medusa-react "^9.0.17"
+    mini-css-extract-plugin "^2.7.6"
+    moment "^2.29.4"
+    path-browserify "^1.0.1"
+    pluralize "^8.0.0"
+    postcss "^8.4.38"
+    postcss-loader "^7.3.2"
+    postcss-preset-env "^8.4.1"
+    prism-react-renderer "^2.0.4"
+    process "^0.11.10"
+    query-string "^8.1.0"
+    react "^18.2.0"
+    react-collapsible "^2.8.3"
+    react-country-flag "^3.0.2"
+    react-currency-input-field "^3.6.8"
+    react-datepicker "^4.8.0"
+    react-dev-utils "^12.0.1"
+    react-dnd "^16.0.1"
+    react-dnd-html5-backend "^16.0.1"
+    react-dom "^18.2.0"
+    react-helmet-async "^1.3.0"
+    react-highlight-words "^0.18.0"
+    react-hook-form "7.38.0"
+    react-hot-toast "2.4.0"
+    react-hotkeys-hook "^3.4.7"
+    react-i18next "^12.3.1"
+    react-json-tree "^0.17.0"
+    react-jwt "^1.1.4"
+    react-nestable "^2.0.0"
+    react-refresh "^0.14.0"
+    react-router-dom "6.8.0"
+    react-select "^5.5.4"
+    react-table "^7.7.0"
+    style-loader "^3.3.3"
+    swc-loader "^0.2.3"
+    swc-minify-webpack-plugin "^2.1.1"
+    tailwindcss "^3.4.3"
+    tailwindcss-radix "^2.7.0"
+    ts-dedent "^2.2.0"
+    type-fest "^3.6.0"
+    webpack "^5.84.1"
+    webpack-dev-server "4.15.0"
+    webpackbar "^5.0.2"
+    zod "^3.22.2"
+
+"@medusajs/admin-ui@^2.1.16":
+  version "2.1.17"
+  resolved "https://registry.yarnpkg.com/@medusajs/admin-ui/-/admin-ui-2.1.17.tgz#ee8c3e1fc19dc0ce9374df3e8b8cedd17b5f4f89"
+  integrity sha512-aLvMrpGESHUxySQ3PQWBWsNJobkPvBRpJlrWCIuIJZPkgJiN4PvgYjP4xic0gAG+dvRJM5F0+rNPEJwiGZ4xug==
+  dependencies:
+    "@babel/parser" "7.22.5"
+    "@babel/traverse" "7.22.5"
+    "@hookform/error-message" "^2.0.1"
+    "@hookform/resolvers" "^3.3.1"
+    "@medusajs/icons" "^1.2.2"
+    "@medusajs/ui" "^3.0.1"
+    "@medusajs/ui-preset" "^1.1.4"
+    "@pmmmwh/react-refresh-webpack-plugin" "^0.5.10"
+    "@radix-ui/react-accordion" "^1.0.1"
+    "@radix-ui/react-avatar" "^1.0.1"
+    "@radix-ui/react-collapsible" "^1.0.1"
+    "@radix-ui/react-dialog" "^1.0.4"
+    "@radix-ui/react-dropdown-menu" "^2.0.2"
+    "@radix-ui/react-popover" "^1.0.3"
+    "@radix-ui/react-portal" "^1.0.2"
+    "@radix-ui/react-radio-group" "^1.1.1"
+    "@radix-ui/react-select" "^2.0.0"
+    "@radix-ui/react-switch" "^1.0.1"
+    "@radix-ui/react-tooltip" "^1.0.3"
+    "@segment/analytics-next" "^1.51.1"
+    "@stdlib/number-float64-base-normalize" "0.0.8"
+    "@svgr/webpack" "^8.0.1"
+    "@swc/core" "^1.3.61"
+    "@tailwindcss/forms" "^0.5.7"
+    "@tanstack/react-query" "4.22.0"
+    "@tanstack/react-table" "^8.7.9"
+    autoprefixer "^10.4.19"
+    chokidar "^3.5.3"
+    clsx "^1.2.1"
+    copy-to-clipboard "^3.3.1"
+    copy-webpack-plugin "^11.0.0"
+    css-loader "^6.8.1"
+    emoji-picker-react "^4.4.3"
+    framer-motion "^9.1.6"
+    html-webpack-plugin "^5.5.1"
+    i18next "^22.5.0"
+    i18next-browser-languagedetector "^7.0.1"
+    i18next-http-backend "^2.2.1"
+    md5 "^2.3.0"
+    medusa-react "^9.0.18"
     mini-css-extract-plugin "^2.7.6"
     moment "^2.29.4"
     path-browserify "^1.0.1"
@@ -3120,6 +3297,29 @@
     rollup-plugin-esbuild "5.0.0"
     ts-dedent "^2.2.0"
 
+"@medusajs/admin@^7.1.10":
+  version "7.1.16"
+  resolved "https://registry.yarnpkg.com/@medusajs/admin/-/admin-7.1.16.tgz#0c042d455d057ea65af234186fa50d6f38c51932"
+  integrity sha512-1BKOL2P4jCzjRNvplnXN4qAPL25SenTc3UhZkp1CSSaXR4uKxowDRpCSQ5g/DTGPIITulKqzdMSzqlQi4eyZdA==
+  dependencies:
+    "@medusajs/admin-ui" "^2.1.16"
+    "@rollup/plugin-alias" "5.0.0"
+    "@rollup/plugin-commonjs" "24.1.0"
+    "@rollup/plugin-json" "6.0.0"
+    "@rollup/plugin-node-resolve" "15.0.2"
+    "@rollup/plugin-replace" "5.0.2"
+    "@rollup/plugin-virtual" "^3.0.1"
+    commander "^10.0.0"
+    dotenv "^16.4.5"
+    esbuild "0.17.18"
+    express "4.18.2"
+    fs-extra "11.1.0"
+    lodash "^4.17.21"
+    medusa-core-utils "1.2.3"
+    rollup "3.20.7"
+    rollup-plugin-esbuild "5.0.0"
+    ts-dedent "^2.2.0"
+
 "@medusajs/cache-inmemory@^1.8.8":
   version "1.8.10"
   resolved "https://registry.yarnpkg.com/@medusajs/cache-inmemory/-/cache-inmemory-1.8.10.tgz#0ff521c46a978ca284be99c60616ada7f5675554"
@@ -3173,6 +3373,11 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@medusajs/icons/-/icons-1.1.0.tgz#eeb8d5aa0ffbea7546d962b38fcf7593a50e2866"
   integrity sha512-90+nCmUq9W4KHgg8XuyiZcp41yRleTqT1Y/OZW+Th8FkCvFd8981ugwu7DYZjnaUvXnBCpsGDQ0zYuJ7sU4QIA==
+
+"@medusajs/icons@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@medusajs/icons/-/icons-1.2.2.tgz#2961143c075a40ba2d337df0e3c915b8a414b64b"
+  integrity sha512-yCaEvCJg1GqbJ8eySqe+y3zS8tiE0cK/XNOsgmCHZ3dsu8i6lKvrsGzPVdjAtKlUJ9F2CnBO8dm4oXrg5w+6CA==
 
 "@medusajs/link-modules@^0.2.4":
   version "0.2.4"
@@ -3340,6 +3545,14 @@
     "@tailwindcss/forms" "^0.5.3"
     tailwindcss-animate "^1.0.6"
 
+"@medusajs/ui-preset@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@medusajs/ui-preset/-/ui-preset-1.1.4.tgz#ab3592f64184c18284e92e0e0170d5f21ae856a6"
+  integrity sha512-/09W6jLyWu24K7kvVpMwhp0K7iQ+Y8j5D2+ZL7vdX1d1/leDBQ3jQP2mZLWmcJIPlqBxvUVkiqWPUz8w05aZ9g==
+  dependencies:
+    "@tailwindcss/forms" "^0.5.3"
+    tailwindcss-animate "^1.0.6"
+
 "@medusajs/ui@3.0.0", "@medusajs/ui@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@medusajs/ui/-/ui-3.0.0.tgz#f4378bd47a864f775c9f58d18a2c95f2d53dffba"
@@ -3408,6 +3621,76 @@
     react-currency-input-field "^3.6.11"
     react-day-picker "^8.8.0"
     tailwind-merge "^1.13.2"
+
+"@medusajs/ui@^2.2.4":
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@medusajs/ui/-/ui-2.4.3.tgz#dcf74889b722ea977f6bec608566a81ebfbaa462"
+  integrity sha512-7HHnWmfq6K0YmqCgGGqeZThYdAI9bi9/Y54J28W7Iy9dhCJICqeNoeUN/Xu4aE+VlfCyuKysjcU4jcpy8o4CUA==
+  dependencies:
+    "@medusajs/icons" "^1.2.1"
+    "@radix-ui/react-accordion" "^1.1.2"
+    "@radix-ui/react-alert-dialog" "^1.0.4"
+    "@radix-ui/react-avatar" "^1.0.3"
+    "@radix-ui/react-checkbox" "^1.0.4"
+    "@radix-ui/react-dialog" "^1.0.4"
+    "@radix-ui/react-dropdown-menu" "^2.0.5"
+    "@radix-ui/react-label" "^2.0.2"
+    "@radix-ui/react-popover" "^1.0.6"
+    "@radix-ui/react-portal" "^1.0.3"
+    "@radix-ui/react-radio-group" "^1.1.3"
+    "@radix-ui/react-scroll-area" "^1.0.4"
+    "@radix-ui/react-select" "^2.0.0"
+    "@radix-ui/react-slot" "^1.0.2"
+    "@radix-ui/react-switch" "^1.0.3"
+    "@radix-ui/react-tabs" "^1.0.4"
+    "@radix-ui/react-toast" "^1.1.4"
+    "@radix-ui/react-tooltip" "^1.0.6"
+    "@react-aria/datepicker" "^3.5.0"
+    "@react-stately/datepicker" "^3.5.0"
+    clsx "^1.2.1"
+    copy-to-clipboard "^3.3.3"
+    cva "1.0.0-beta.1"
+    date-fns "^2.30.0"
+    prism-react-renderer "^2.0.6"
+    prismjs "^1.29.0"
+    react-currency-input-field "^3.6.11"
+    react-day-picker "^8.8.0"
+    tailwind-merge "^2.2.1"
+
+"@medusajs/ui@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@medusajs/ui/-/ui-3.0.1.tgz#1e5fa88975dc58bc06aa048711efad697215512c"
+  integrity sha512-L+zcJGU6Epy+7cNWJi595r/GvwIwGuEnxn/Bk6FLqH+rl64zMawiUjjX9UbuUcPJbBbGTg2i5UJfuPZ+oIR8Lw==
+  dependencies:
+    "@medusajs/icons" "^1.2.2"
+    "@radix-ui/react-accordion" "^1.1.2"
+    "@radix-ui/react-alert-dialog" "^1.0.4"
+    "@radix-ui/react-avatar" "^1.0.3"
+    "@radix-ui/react-checkbox" "^1.0.4"
+    "@radix-ui/react-dialog" "^1.0.4"
+    "@radix-ui/react-dropdown-menu" "^2.0.5"
+    "@radix-ui/react-label" "^2.0.2"
+    "@radix-ui/react-popover" "^1.0.6"
+    "@radix-ui/react-portal" "^1.0.3"
+    "@radix-ui/react-radio-group" "^1.1.3"
+    "@radix-ui/react-scroll-area" "^1.0.4"
+    "@radix-ui/react-select" "^2.0.0"
+    "@radix-ui/react-slot" "^1.0.2"
+    "@radix-ui/react-switch" "^1.0.3"
+    "@radix-ui/react-tabs" "^1.0.4"
+    "@radix-ui/react-tooltip" "^1.0.6"
+    "@react-aria/datepicker" "^3.5.0"
+    "@react-stately/datepicker" "^3.5.0"
+    clsx "^1.2.1"
+    copy-to-clipboard "^3.3.3"
+    cva "1.0.0-beta.1"
+    date-fns "^2.30.0"
+    prism-react-renderer "^2.0.6"
+    prismjs "^1.29.0"
+    react-currency-input-field "^3.6.11"
+    react-day-picker "^8.8.0"
+    sonner "^1.4.41"
+    tailwind-merge "^2.2.1"
 
 "@medusajs/utils@1.11.9":
   version "1.11.9"
@@ -6325,6 +6608,13 @@
   resolved "https://registry.yarnpkg.com/@types/argparse/-/argparse-1.0.38.tgz#a81fd8606d481f873a3800c6ebae4f1d768a56a9"
   integrity sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==
 
+"@types/async-retry@^1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@types/async-retry/-/async-retry-1.4.8.tgz#eb32df13aceb9ba1a8a80e7fe518ff4e3fe46bb3"
+  integrity sha512-Qup/B5PWLe86yI5I3av6ePGaeQrIHNKCwbsQotD6aHQ6YkHsMUxVZkZsmx/Ry3VZQ6uysHwTjQ7666+k6UjVJA==
+  dependencies:
+    "@types/retry" "*"
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.14":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"
@@ -6599,6 +6889,11 @@
   version "1.20.2"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.20.2.tgz#97d26e00cd4a0423b4af620abecf3e6f442b7975"
   integrity sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==
+
+"@types/retry@*":
+  version "0.12.5"
+  resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.5.tgz#f090ff4bd8d2e5b940ff270ab39fd5ca1834a07e"
+  integrity sha512-3xSjTp3v03X/lSQLkczaN9UIEwJMoMCA1+Nb5HfbJEQWogdeQIyVtTvxPXDQjZ5zws8rFQfVfRdz03ARihPJgw==
 
 "@types/retry@0.12.0":
   version "0.12.0"
@@ -7133,6 +7428,13 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
+async-retry@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/async-retry/-/async-retry-1.3.3.tgz#0e7f36c04d8478e7a58bdbed80cedf977785f280"
+  integrity sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==
+  dependencies:
+    retry "0.13.1"
+
 async@^3.2.3:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/async/-/async-3.2.5.tgz#ebd52a8fdaf7a2289a24df399f8d8485c8a46b66"
@@ -7215,6 +7517,15 @@ axios@^0.26.0:
   integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
   dependencies:
     follow-redirects "^1.14.8"
+
+axios@^1.6.7:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.7.tgz#2f554296f9892a72ac8d8e4c5b79c14a91d0a47f"
+  integrity sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==
+  dependencies:
+    follow-redirects "^1.15.6"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 babel-jest@^27.5.1:
   version "27.5.1"
@@ -9472,6 +9783,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.14.4, fol
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
   integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
 
+follow-redirects@^1.15.6:
+  version "1.15.9"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
+  integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
+
 fontkit@^1.8.1:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/fontkit/-/fontkit-1.9.0.tgz#95729cc9f24995fb068ea53aea2f1f193e323f2b"
@@ -11630,6 +11946,30 @@ medusa-core-utils@1.2.2:
   dependencies:
     awilix "^8.0.0"
 
+medusa-core-utils@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/medusa-core-utils/-/medusa-core-utils-1.2.3.tgz#d6f327c771868122721c470d2f5be3551bdf6f6e"
+  integrity sha512-mNUqWh8G7BF9dcxt3t22GtSJrm4pfpU98QzvNgpqAvirVbBI4lOCpDQGoKE+jMHOLQJHrLQFoSJeqcofDJvEgA==
+  dependencies:
+    awilix "^8.0.0"
+
+medusa-events-webhooks@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/medusa-events-webhooks/-/medusa-events-webhooks-1.1.5.tgz#0b5ef5e96d52311dbf3de2d4c5e52a0af656aa9c"
+  integrity sha512-smuStuDiZTZJ6WmSLyvKBEMJ1W1pxcuyCuEXteg5BDX2qUCfRK1e1rmCrL7yQSKlZDQLhe3UwdIZeikS6h0IMA==
+  dependencies:
+    "@medusajs/admin" "^7.1.10"
+    "@medusajs/admin-ui" "2.1.11"
+    "@types/async-retry" "^1.4.8"
+    async-retry "^1.3.3"
+    axios "^1.6.7"
+    body-parser "^1.19.0"
+    cors "^2.8.5"
+    dotenv "16.3.1"
+    express "^4.17.2"
+    prism-react-renderer "^2.0.4"
+    typeorm "^0.3.16"
+
 medusa-file-s3@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/medusa-file-s3/-/medusa-file-s3-1.4.0.tgz#e352470b6c3822fe39d5b40defea2be16931a731"
@@ -11713,6 +12053,13 @@ medusa-react@^9.0.11, medusa-react@^9.0.9:
   version "9.0.11"
   resolved "https://registry.yarnpkg.com/medusa-react/-/medusa-react-9.0.11.tgz#dea31857f04018a3460cc0145b497540ccd499ac"
   integrity sha512-RV76M5AmqhCMt25bAsIVl9UKawvPKDUzxF2CwFZw2w5ULwFG2rxyzmVMktKuGxKhwUfzUWMrYqmG/0fMfgtWyQ==
+  dependencies:
+    "@medusajs/medusa-js" "*"
+
+medusa-react@^9.0.13, medusa-react@^9.0.18:
+  version "9.0.18"
+  resolved "https://registry.yarnpkg.com/medusa-react/-/medusa-react-9.0.18.tgz#02b826f5b2720ecfd0334fdd9a49f341970f8ab9"
+  integrity sha512-3xSw3MuH7OEX6Tz21Tthev2+1Mk/S1nI6qsqgRqUl4prZTcRFgHXq421hPeqd1RoX2h8SO2Ap1/qObc2da3tCg==
   dependencies:
     "@medusajs/medusa-js" "*"
 
@@ -13136,6 +13483,11 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
+
 psl@^1.1.33:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.9.0.tgz#d0df2a137f00794565fcaf3b2c00cd09f8d5a5a7"
@@ -13830,7 +14182,7 @@ retry-axios@^2.6.0:
   resolved "https://registry.yarnpkg.com/retry-axios/-/retry-axios-2.6.0.tgz#d4dc5c8a8e73982e26a705e46a33df99a28723e0"
   integrity sha512-pOLi+Gdll3JekwuFjXO3fTq+L9lzMQGcSq7M5gIjExcl3Gu1hd4XXuf5o3+LuSBsaULQH7DiNbsqPd1chVpQGQ==
 
-retry@^0.13.1:
+retry@0.13.1, retry@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
   integrity sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==

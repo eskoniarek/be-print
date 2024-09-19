@@ -78,13 +78,7 @@ const plugins = [
           process.env.S3_DOWNLOAD_FILE_DURATION,
     },
   },
-  {
-    resolve: `medusa-plugin-algolia`,
-    options: {
-      applicationId: process.env.ALGOLIA_APP_ID,
-      adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
-    },
-  },
+
 
   {
   resolve: `medusa-plugin-sendgrid`,
